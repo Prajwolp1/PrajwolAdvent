@@ -1,0 +1,60 @@
+#Day 2 Part 2
+
+def get_file_data(file_name):
+    f = open(file_name)
+    data = []
+    for line in f:
+        data.append(line.rstrip())
+    return data
+
+file_data = get_file_data("input.txt")
+safe = 0
+for line in file_data:
+    splitList = line.split()
+    total = 0
+    differenceList = []
+
+    for i in range(len(splitList) - 1):
+        if (not((i + 1) > len(splitList) - 1)):
+            difference = int(splitList[i]) - int(splitList[i + 1])
+            differenceList.append(difference)
+            absDifference = abs(difference)
+            if (absDifference < 1 or absDifference > 3):    
+                splitList.remove(splitList[i])
+
+    for i in range(len(splitList) - 1):
+        if (not((i + 1) > len(splitList) - 1)):
+            difference = int(splitList[i]) - int(splitList[i + 1])
+            differenceList.append(difference)
+            absDifference = abs(difference)
+            if (absDifference < 1 or absDifference > 3):    
+                total += 1
+
+    negativeDiff = 0
+    positiveDiff = 0
+    
+    for diff in (differenceList):
+        if (diff <= 0):
+            negativeDiff += 1
+        if (diff >= 0):
+            positiveDiff += 1
+
+    if (positiveDiff == len(differenceList) and negativeDiff == len(differenceList) ):
+            for i in range(len(differenceList)):
+                if (positiveDiff > negativeDiff and differenceList[i] <= 0):
+                    differenceList.remove(differenceList[i])
+                if (negativeDiff > positiveDiff and differenceList[i] >= 0):
+                    differenceList.remove(differenceList[i])   
+            pDiff = 0
+            nDiff = 0
+            for diff in (differenceList):
+                if (diff <= 0):
+                    nDiff += 1
+                if (diff >= 0):
+                    pDiff += 1
+            if (pDiff == len(differenceList) and nDiff == len(differenceList)):
+                total += 1
+    if (total == 0):
+         safe += 1
+    
+print(safe)
