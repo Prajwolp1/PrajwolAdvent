@@ -11,17 +11,18 @@ def get_file_data(file_name):
 file_data = get_file_data("input.txt")
 listOfNum = []
 for line in file_data:
-    x = re.findall("([(][0-9]+,[0-9]+[)])", line)
+    x = re.findall("(mul[(][0-9]+,[0-9]+[)])", line)
     listOfNum.append(x)
-print(listOfNum)
+
 sum = 0
 for lines in listOfNum:
     for lineTwo in lines:
-        splitLine = lineTwo.split(", ")
-        print(splitLine)
-        for i in range(len(splitLine)):
-            print(i)
-            if splitLine[i] == "(":
-                sum += (splitLine[i + 1] * splitLine[i + 3])
-                print(sum)
-print(listOfNum)
+        numList = []
+        x = re.findall("[0-9]+", lineTwo)
+        numList.append(x)
+        print(numList)
+        print(numList[0][0])
+        print(numList[0][1])
+        sum += int(numList[0][0]) * int(numList[0][1])
+    
+print(sum)
