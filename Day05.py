@@ -7,28 +7,37 @@ def get_file_data(file_name):
         data.append(line.rstrip())
     return data
 
-
-file_data = get_file_data("input.txt")
-
+file_data = get_file_data("input.txt")    
+        
 pages = []
 order = []
+
 for line in file_data:
+    added = False
     for i in line:
         if i == "|":
             pages.append(line)
-        if i == ",":
+        if i == "," and not(added):
             order.append(line)
+            added = True
 
 columnOne = []
 columnTwo = []
 for line in pages:
     columnOne.append(line[0] + line[1])
     columnTwo.append(line[3] + line[4])
-
 total = 0
 for line in order:
-    splitLine = line.split(",")
-    for lines in splitLine:
-        print(lines)
+    orderedOrder = line.split(",")
+    works = True
+    for i in range(len(orderedOrder) - 1):
+        for j in range(len(columnOne)):
+            if columnOne[j] != orderedOrder[i] and columnTwo[j] != orderedOrder[i + 1]:
+                works = False
+    if (works == True):
+        total += 1
+
+print(total)
+
 
 
