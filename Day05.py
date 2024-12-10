@@ -26,16 +26,20 @@ columnTwo = []
 for line in pages:
     columnOne.append(line[0] + line[1])
     columnTwo.append(line[3] + line[4])
+
 total = 0
 for line in order:
     orderedOrder = line.split(",")
-    works = True
+    
+    count = 0
     for i in range(len(orderedOrder) - 1):
         for j in range(len(columnOne)):
-            if columnOne[j] != orderedOrder[i] and columnTwo[j] != orderedOrder[i + 1]:
-                works = False
-    if (works == True):
-        total += 1
+            if columnOne[j] == orderedOrder[i] and columnTwo[j] == orderedOrder[i + 1]:
+                count += 1
+    if (count == len(orderedOrder) - 1):
+        middle = int((len(orderedOrder) / 2))
+        print(middle)
+        total += int(orderedOrder[middle])
 
 print(total)
 
