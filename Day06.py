@@ -29,22 +29,26 @@ for i in range(len(file_data)):
             posY = i
             posX = j
             facing = "down"
-posX = int(posX)
 posY = int(posY)
-print(facing)
+posX = int(posX)
 print(posX)
 print(posY)
 while True:
-    if (facing == "up" and posY > 0):
-        if (file_data[posX][posY - 1] != "#"):
-            posY -= 1
-            if (file_data[posX][posY] != "X"):
+    break
+    print(file_data[posY][posX])
+    if facing == "up" and posY > 0:
+        if (file_data[posY - 1][posX] != "#"):
+            if (file_data[posY - 1][posX] != "X"):
                 count += 1
             else:
-                file_data[posX][posY] == "X"
-        else:
+                file_data[posY][posX] == "X"
+            posX -= 1
+        if (file_data[posX][posY] == "#"):
             facing = "right"
     else:
         break
+
+print(count)
+print(facing)
     
 
