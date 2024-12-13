@@ -31,24 +31,50 @@ for i in range(len(file_data)):
             facing = "down"
 posY = int(posY)
 posX = int(posX)
-print(posX)
-print(posY)
-while True:
-    break
-    print(file_data[posY][posX])
-    if facing == "up" and posY > 0:
+end = False
+while not end:
+    if facing == "up" and posY > 1:
         if (file_data[posY - 1][posX] != "#"):
             if (file_data[posY - 1][posX] != "X"):
                 count += 1
             else:
-                file_data[posY][posX] == "X"
-            posX -= 1
-        if (file_data[posX][posY] == "#"):
+                file_data[posY - 1][posX] == "X"
+            posY -= 1
+        
+        if (file_data[posY - 1][posX] == "#"):
             facing = "right"
-    else:
-        break
 
+    if facing == "right" and posX < len(file_data[posY]) - 1:
+        if (file_data[posY][posX + 1] != "#"):
+            if (file_data[posY][posX + 1] != "X"):
+                count += 1
+            else:
+                file_data[posY][posX + 1] == "X"
+            posX += 1
+        if (file_data[posY][posX + 1] == "#"):
+            facing = "down"
+
+    if facing == "down" and posY < len(file_data) - 1:
+        if (file_data[posY + 1][posX] != "#"):
+            if (file_data[posY + 1][posX] != "X"):
+                count += 1
+            else:
+                file_data[posY + 1][posX] == "X"
+            posY += 1
+        if (file_data[posY + 1][posX] == "#"):
+            facing = "left"
+
+    if facing == "left" and posX > 0:
+        if (file_data[posY][posX - 1] != "#"):
+            if (file_data[posY][posX - 1] != "X"):
+                count += 1
+            else:
+                file_data[posY][posX - 1] == "X"
+            posX -= 1
+        if (file_data[posY][posX - 1] == "#"):
+            facing = "up"
+    
 print(count)
-print(facing)
+
     
 
