@@ -33,36 +33,46 @@ posY = int(posY)
 posX = int(posX)
 end = False
 while not end:
-    if facing == "up" and posY > 1:
+    if facing == "up" and posY >= 0:
+        
         if (file_data[posY - 1][posX] != "#"):
             if (file_data[posY - 1][posX] != "X"):
                 count += 1
             else:
                 file_data[posY - 1][posX] == "X"
             posY -= 1
-        
-        if (file_data[posY - 1][posX] == "#"):
-            facing = "right"
+        if (posY <= 0):
+            end = True
+        if not end:
+            if (file_data[posY - 1][posX] == "#"):
+                facing = "right"
 
     if facing == "right" and posX < len(file_data[posY]) - 1:
+        
         if (file_data[posY][posX + 1] != "#"):
             if (file_data[posY][posX + 1] != "X"):
                 count += 1
             else:
                 file_data[posY][posX + 1] == "X"
             posX += 1
-        if (file_data[posY][posX + 1] == "#"):
-            facing = "down"
+        if (posX >= len(file_data) - 1):
+            end = True
+        if not end:
+            if (file_data[posY][posX + 1] == "#"):
+                facing = "down"
 
-    if facing == "down" and posY < len(file_data) - 1:
+    if facing == "down" and posY < len(file_data):
         if (file_data[posY + 1][posX] != "#"):
             if (file_data[posY + 1][posX] != "X"):
                 count += 1
             else:
                 file_data[posY + 1][posX] == "X"
             posY += 1
-        if (file_data[posY + 1][posX] == "#"):
-            facing = "left"
+        if (posY >= len(file_data) - 1):
+            end = True
+        if not end:
+            if file_data[posY + 1][posX] == "#":
+                facing = "left"
 
     if facing == "left" and posX > 0:
         if (file_data[posY][posX - 1] != "#"):
@@ -71,10 +81,10 @@ while not end:
             else:
                 file_data[posY][posX - 1] == "X"
             posX -= 1
-        if (file_data[posY][posX - 1] == "#"):
-            facing = "up"
+        if (posX <= 0):
+            end = True
+        if not end:
+            if (file_data[posY][posX - 1] == "#"):
+                facing = "up"
     
 print(count)
-
-    
-
